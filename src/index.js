@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.json())
 
-app.use('/users', UserRoutes)
+app.use('/', UserRoutes)
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)

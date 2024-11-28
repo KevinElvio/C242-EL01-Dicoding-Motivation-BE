@@ -1,5 +1,4 @@
 const UsersModel = require('../models/usersModel');
-const bcrypt = require('bcryptjs');
 
 const getAllUsers = async (req, res) => {
     try {
@@ -16,23 +15,7 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-const createNewUser = async (req, res) => {
-    const {body} = req;
-    try {
-        const password_hash = bcrypt.hashSync(body.password_hash, 10);
-        body.password_hash = password_hash;
-        await UsersModel.createNewUser(body);
-        res.status(201).json({
-            message: 'createNewUserSuccess',
-            data: body
-        })
-    } catch (error) {
-        res.status(500).json({
-            message: "Server Error",
-            serverMessage: error.message
-        });
-    }
-}
+
 
 const updateUser = async (req, res) => {
     const { id } = req.params;
@@ -72,9 +55,10 @@ const deleteUser = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
     getAllUsers,
-    createNewUser,
     updateUser,
     deleteUser
 }

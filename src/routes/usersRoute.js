@@ -1,15 +1,20 @@
 const express = require('express');
-
-const UserController = require('../controller/userController.js');
-
+const accessValidation = require('../middleware/accessValidation');
+const leaderboardController = require('../controller/leaderboardController');
+const UserController = require('../controller/userController');
+const auth = require('../controller/auth');
 const router = express.Router();
 
-// router.post('/login', UserController.login);
-// router.post('/register', UserController.register);
+// Auth
+router.post('/login', auth.login);
+router.post('/register', auth.register);
 
-router.get('/', UserController.getAllUsers);
-router.post('/', UserController.createNewUser);
-router.put('/:id', UserController.updateUser);
-router.delete('/:id', UserController.deleteUser);
+// Users
+router.get('/users', accessValidation, UserController.getAllUsers);
+router.put('/users/:id', UserController.updateUser);
+router.delete('/users/:id', UserController.deleteUser);
+
+// leaderboard
+router.get('/leaderboards', leaderboardController.getLeaderboard);
 
 module.exports = router;

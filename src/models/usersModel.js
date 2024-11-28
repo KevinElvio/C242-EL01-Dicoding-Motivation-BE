@@ -1,6 +1,11 @@
 const dbPool = require('../config/database');
 
 
+const findUserByEmail = (body) => {
+    const SQLQuery = 'SELECT * FROM users WHERE email = ?';
+    return dbPool.execute(SQLQuery, [body.email]);
+};
+
 const getAllUsers = () => {
     const SQLQuery = 'SELECT * FROM users';
     return dbPool.execute(SQLQuery)
@@ -58,5 +63,6 @@ module.exports = {
     getAllUsers,
     createNewUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    findUserByEmail
 }
