@@ -1,5 +1,17 @@
 const dbPool = require('../config/database');
 
+const getUserBadges = (user_id) => {
+    const SQLQuery = `
+    SELECT * FROM user_achievements WHERE user_id = ?;`;
+    return dbPool.execute(SQLQuery, [user_id]);
+}
+
+// const getUserBadgesById = (user_id,) => {
+//     const SQLQuery = `
+//     SELECT * FROM user_achievements WHERE user_id = ?;`;
+//     return dbPool.execute(SQLQuery, [user_id]);
+// }
+
 
 const findUserByEmail = (body) => {
     const SQLQuery = 'SELECT * FROM users WHERE email = ?';
@@ -64,5 +76,8 @@ module.exports = {
     createNewUser,
     updateUser,
     deleteUser,
-    findUserByEmail
+    findUserByEmail,
+    getUserBadges,
+    // getUserBadgesById,
+    
 }
