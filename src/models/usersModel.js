@@ -12,6 +12,30 @@ const getUserBadges = (user_id) => {
 //     return dbPool.execute(SQLQuery, [user_id]);
 // }
 
+// const redeemPoints = (user_id) => {
+//     const SQLQuery = `
+//     SELECT * FROM achievements WHERE achievements_id = ?;`;
+//     return dbPool.execute(SQLQuery, [achievements_id]);
+// };
+
+
+const lastLogin = (body, user_id) => {
+    // if (!body.last_login || !user_id) {
+    //     throw new Error('Missing required parameters: last_login or user_id');
+    // }
+    const SQLQuery = `
+    UPDATE users
+    SET last_login = ?
+    WHERE user_id = ?;
+    `;
+
+    const values = [
+        body.last_login,
+        user_id,
+    ];
+return dbPool.execute(SQLQuery, values);
+};
+
 
 const findUserByEmail = (body) => {
     const SQLQuery = 'SELECT * FROM users WHERE email = ?';
@@ -45,9 +69,8 @@ const createNewUser = (body) => {
 const updateUser = (body, user_id) => {
     const SQLQuery = `
     UPDATE users
-    SET email = ?, username = ?, password_hash = ?, github_profile = ?, points = ?, current_streak = ?, longest_streak = ?
-    WHERE user_id = ?;
-    `;
+    SET email = ?, username = ?, password_hash = ?, github_profile = ?, points = ?, current_streak = ?, longest_streak = ?,
+    WHERE user_id = ?;`;
 
     const values = [
         body.email,
@@ -79,5 +102,7 @@ module.exports = {
     findUserByEmail,
     getUserBadges,
     // getUserBadgesById,
-    
+    // redeemPoints,
+    lastLogin,
+
 }

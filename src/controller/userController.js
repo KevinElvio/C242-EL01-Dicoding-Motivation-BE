@@ -1,5 +1,21 @@
 const UsersModel = require('../models/usersModel');
 
+// const redeemPoints = async (req, res) => {
+//     const { achievements_id } = req.params;
+//     try {
+//         const [data] = await UsersModel.redeemPoints(achievements_id);
+//         res.json({
+//             message: 'Success',
+//             data: data
+//         })
+//     } catch (error) {
+//         res.status(500).json({
+//             message: "Server Error",
+//             serverMessage: error.message
+//         });
+//     }
+// };
+
 const getUserBadges = async (req, res) => {
     const { id } = req.params;
     try {

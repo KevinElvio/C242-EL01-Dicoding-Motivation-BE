@@ -40,6 +40,9 @@ const login = async (req, res) => {
             });
         }
 
+        const last_login = new Date();
+        await UsersModel.lastLogin({ last_login}, user[0].user_id );
+
         const payload = {
             data: user[0]
         };
