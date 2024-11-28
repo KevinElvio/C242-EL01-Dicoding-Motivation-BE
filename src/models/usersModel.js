@@ -20,9 +20,6 @@ const getUserBadges = (user_id) => {
 
 
 const lastLogin = (body, user_id) => {
-    // if (!body.last_login || !user_id) {
-    //     throw new Error('Missing required parameters: last_login or user_id');
-    // }
     const SQLQuery = `
     UPDATE users
     SET last_login = ?
@@ -69,7 +66,7 @@ const createNewUser = (body) => {
 const updateUser = (body, user_id) => {
     const SQLQuery = `
     UPDATE users
-    SET email = ?, username = ?, password_hash = ?, github_profile = ?, points = ?, current_streak = ?, longest_streak = ?,
+    SET email = ?, username = ?, password_hash = ?, github_profile = ?, points = ?, current_streak = ?, longest_streak = ?
     WHERE user_id = ?;`;
 
     const values = [
