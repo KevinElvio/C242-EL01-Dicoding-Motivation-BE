@@ -1,32 +1,32 @@
-const leaderboardModels = require('../models/leaderboard');
+const userModel = require('../models/usersModel');
 
-const getLeaderboard = async (req, res) => {
+const getStreak = async (req, res) => {
     try {
-        const [data] = await leaderboardModels.getLeaderboard();
-        if(data.length === 0){
+        const [data] = await userModel.getAllUsers();
+        if (data.length === 0) {
             return res.status(404).json({
                 message: 'Failed',
                 data: 'No data found'
             })
         }
         res.json({
-            message: 'getLeaderboardSuccess',
+            message: 'getStreakSuccess',
             data: data.map(item => {
                 return {
-                    username : item.username,
-                    points : item.points
+                    username: item.username,
+                    current_streak: item.current_streak,
+                    longest_streak: item.longest_streak
                 }
             })
-        })
+        });
     } catch (error) {
         res.status(404).json({
             message: "Data Not Found",
             serverMessage: error.message
         });
     }
-
 };
 
 module.exports = {
-    getLeaderboard
-}
+    getStreak
+};
