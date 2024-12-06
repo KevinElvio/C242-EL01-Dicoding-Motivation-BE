@@ -6,7 +6,7 @@ const router = express.Router();
 const leaderboardController = require('../controller/leaderboardController');
 const UserController = require('../controller/userController');
 const streakController = require('../controller/streakController');
-const remindersController = require('../models/reminders');
+const remindersController = require('../controller/reminderController');
 const auth = require('../controller/auth');
 
 // Auth
@@ -24,7 +24,11 @@ router.get('/users/:id/badges', UserController.getUserBadges);
 router.get('/users/streak', streakController.getStreak);
 
 // Reminders
-// router.get('/users/{id}/reminders', remindersController.getReminders);
+router.get('/users/:id/reminders', remindersController.getReminders);
+router.get('/users/:id/reminders/:reminders_id', remindersController.getReminderById);
+router.post('/users/:id/reminders', remindersController.addReminder);
+router.put('/users/:id/reminders/:reminders_id', remindersController.updateReminder);
+router.delete('/users/:id/reminders/:reminders_id', remindersController.deleteReminder);
 
 // Reedem Points
 // router.get('/users/{id}/redeems/', UserController.redeemPoints);
