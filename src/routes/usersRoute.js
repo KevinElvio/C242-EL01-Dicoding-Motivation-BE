@@ -23,11 +23,8 @@ router.get('/users/:id/badges', UserController.getUserBadgesId);
 // Streak
 router.get('/users/streak', streakController.getStreak);
 
-// Reminders
-// router.get('/users/{id}/reminders', remindersController.getReminders);
-
 // Reedem Points
-// router.get('/users/{id}/redeems/', UserController.redeemPoints);
+router.get('/users/:id/redeems', UserController.getRedeemPoints);
 
 // leaderboard
 router.get('/leaderboards', leaderboardController.getLeaderboard);

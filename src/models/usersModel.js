@@ -60,6 +60,27 @@ const getUserBadgesId = (user_id) => {
     return dbPool.execute(SQLQuery, [user_id]);
 }
 
+const getRedeemPoints = (user_id) => {
+    const SQLQuery = `SELECT 
+    ui.user_id,
+    ri.item_id,
+    ri.name AS item_name,
+    ri.description,
+    ri.points,
+    ui.redeem_at
+    FROM 
+    user_items ui
+    JOIN 
+    redeem_items ri 
+    ON 
+    ui.item_id = ri.item_id
+    WHERE 
+    ui.user_id = ?;
+`;
+    return dbPool.execute(SQLQuery, [user_id]);
+}
+
+
 const createNewUser = (body) => {
 
     const SQLQuery = `
@@ -115,7 +136,7 @@ module.exports = {
     findUserByEmail,
     getUserBadges,
     getUserBadgesId,
-    // redeemPoints,
+    getRedeemPoints,
     lastLogin,
 
 }
