@@ -137,6 +137,6 @@ module.exports = {
     getUserBadges,
     getUserBadgesId,
     getRedeemPoints,
-    lastLogin,
+    lastLogin
 
 }

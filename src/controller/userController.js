@@ -18,6 +18,7 @@ const getRedeemPoints = async (req, res) => {
 
 
 
+
 const getUserBadges = async (req, res) => {
     try {
         const [data] = await UsersModel.getUserBadges();
