@@ -2,28 +2,28 @@ const dbPool = require('../config/database');
 
 
 // const getUserBadgesById = (user_id,) => {
-    //     const SQLQuery = `
-    //     SELECT * FROM user_achievements WHERE user_id = ?;`;
-    //     return dbPool.execute(SQLQuery, [user_id]);
-    // }
-    
-    // const redeemPoints = (user_id) => {
-        //     const SQLQuery = `
-        //     SELECT * FROM achievements WHERE achievements_id = ?;`;
-        //     return dbPool.execute(SQLQuery, [achievements_id]);
-        // };
-        
-        
-        const lastLogin = (body, user_id) => {
-            const SQLQuery = `
+//     const SQLQuery = `
+//     SELECT * FROM user_achievements WHERE user_id = ?;`;
+//     return dbPool.execute(SQLQuery, [user_id]);
+// }
+
+// const redeemPoints = (user_id) => {
+//     const SQLQuery = `
+//     SELECT * FROM achievements WHERE achievements_id = ?;`;
+//     return dbPool.execute(SQLQuery, [achievements_id]);
+// };
+
+
+const lastLogin = (body, user_id) => {
+    const SQLQuery = `
             UPDATE users
             SET last_login = ?
             WHERE user_id = ?;
             `;
-            
-            const values = [
-                body.last_login,
-                user_id,
+
+    const values = [
+        body.last_login,
+        user_id,
     ];
     return dbPool.execute(SQLQuery, values);
 };
@@ -42,6 +42,22 @@ const getAllUsers = () => {
 const getUserBadges = () => {
     const SQLQuery = `SELECT * FROM achievements;`;
     return dbPool.execute(SQLQuery);
+}
+
+const getUserBadgesId = (user_id) => {
+    const SQLQuery = `SELECT 
+    achievements.name,
+    achievements.description,
+    achievements.point_rewards
+    FROM 
+    user_achievements
+    JOIN 
+    achievements 
+    ON 
+    user_achievements.achievement_id = achievements.id
+    WHERE 
+    user_achievements.user_id = ?;`;
+    return dbPool.execute(SQLQuery, [user_id]);
 }
 
 const createNewUser = (body) => {
@@ -79,7 +95,7 @@ const updateUser = (body, user_id) => {
         body.longest_streak,
         user_id,
     ];
-return dbPool.execute(SQLQuery, values);
+    return dbPool.execute(SQLQuery, values);
 };
 
 const deleteUser = (user_id) => {
@@ -98,7 +114,7 @@ module.exports = {
     deleteUser,
     findUserByEmail,
     getUserBadges,
-    // getUserBadgesById,
+    getUserBadgesId,
     // redeemPoints,
     lastLogin,
 

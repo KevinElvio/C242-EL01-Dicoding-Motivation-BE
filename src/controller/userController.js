@@ -32,6 +32,22 @@ const getUserBadges = async (req, res) => {
         });
     }
 }
+const getUserBadgesId = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const [data] = await UsersModel.getUserBadges(id);
+        res.json({
+            message: 'Success',
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server Error",
+            serverMessage: error.message
+        });
+
+    }
+}
 
 const getAllUsers = async (req, res) => {
     try {
@@ -97,6 +113,6 @@ module.exports = {
     updateUser,
     deleteUser,
     getUserBadges,
-    // getUserBadgesById,
+    getUserBadgesId,
 
 }
