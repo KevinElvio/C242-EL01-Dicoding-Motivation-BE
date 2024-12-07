@@ -16,16 +16,11 @@ const UsersModel = require('../models/usersModel');
 //     }
 // };
 
+
+
 const getUserBadges = async (req, res) => {
-    const { id } = req.params;
     try {
-        const [data] = await UsersModel.getUserBadgesById(id);
-        if (data.length === 0) {
-            return res.status(404).json({
-                message: 'Failed',
-                data: 'No badges not found'
-            })
-        }
+        const [data] = await UsersModel.getUserBadges();
         res.json({
             message: 'Success',
             data: data
@@ -72,9 +67,9 @@ const updateUser = async (req, res) => {
             message: "Server Error",
             serverMessage: error.message
         });
-        
+
     }
-   
+
 }
 
 const deleteUser = async (req, res) => {
@@ -103,5 +98,5 @@ module.exports = {
     deleteUser,
     getUserBadges,
     // getUserBadgesById,
-    
+
 }

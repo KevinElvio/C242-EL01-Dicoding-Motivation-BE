@@ -1,36 +1,31 @@
 const dbPool = require('../config/database');
 
-const getUserBadges = (user_id) => {
-    const SQLQuery = `
-    SELECT * FROM user_achievements WHERE user_id = ?;`;
-    return dbPool.execute(SQLQuery, [user_id]);
-}
 
 // const getUserBadgesById = (user_id,) => {
-//     const SQLQuery = `
-//     SELECT * FROM user_achievements WHERE user_id = ?;`;
-//     return dbPool.execute(SQLQuery, [user_id]);
-// }
-
-// const redeemPoints = (user_id) => {
-//     const SQLQuery = `
-//     SELECT * FROM achievements WHERE achievements_id = ?;`;
-//     return dbPool.execute(SQLQuery, [achievements_id]);
-// };
-
-
-const lastLogin = (body, user_id) => {
-    const SQLQuery = `
-    UPDATE users
-    SET last_login = ?
-    WHERE user_id = ?;
-    `;
-
-    const values = [
-        body.last_login,
-        user_id,
+    //     const SQLQuery = `
+    //     SELECT * FROM user_achievements WHERE user_id = ?;`;
+    //     return dbPool.execute(SQLQuery, [user_id]);
+    // }
+    
+    // const redeemPoints = (user_id) => {
+        //     const SQLQuery = `
+        //     SELECT * FROM achievements WHERE achievements_id = ?;`;
+        //     return dbPool.execute(SQLQuery, [achievements_id]);
+        // };
+        
+        
+        const lastLogin = (body, user_id) => {
+            const SQLQuery = `
+            UPDATE users
+            SET last_login = ?
+            WHERE user_id = ?;
+            `;
+            
+            const values = [
+                body.last_login,
+                user_id,
     ];
-return dbPool.execute(SQLQuery, values);
+    return dbPool.execute(SQLQuery, values);
 };
 
 
@@ -43,6 +38,11 @@ const getAllUsers = () => {
     const SQLQuery = 'SELECT * FROM users';
     return dbPool.execute(SQLQuery)
 };
+
+const getUserBadges = () => {
+    const SQLQuery = `SELECT * FROM achievements;`;
+    return dbPool.execute(SQLQuery);
+}
 
 const createNewUser = (body) => {
 
