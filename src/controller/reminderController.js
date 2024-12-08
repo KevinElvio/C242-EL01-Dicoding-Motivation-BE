@@ -3,6 +3,7 @@ const remindersModel = require("../models/reminders");
 const usersModel = require("../models/usersModel");
 // const { oAuth2Reminder } = require('/oAuth2Reminder');
 const { google } = require("googleapis");
+const { default: axios } = require("axios");
 const OAuth2 = google.auth.OAuth2;
 
 const oauth2Client = new OAuth2(
@@ -160,12 +161,21 @@ const addReminder = async (req, res) => {
     });
 
     await oauth2Client.refreshAccessToken();
+    //get quotes from external api
+    api_key = process.env.QUOTES_KEY;
+    const quotes_api = await axios.get('https://api.api-ninjas.com/v1/quotes?category=learning', {
+      headers: {
+        'X-Api-Key': `${api_key}`
+      }
+    });
+    // get the quote and the author
+    const { quote, author } = quotes_api.data[0];
 
     const calendar = google.calendar({ version: "v3", auth: oauth2Client });
 
     let eventDetails = {
       summary: name,
-      description: `Learning reminder for: ${name}`,
+      description: `<p>"${quote}"</p><p>-${author}</p>`,
       timeZone: "Asia/Jakarta",
     };
 
@@ -179,6 +189,7 @@ const addReminder = async (req, res) => {
           },
           end: {
             dateTime: `${date}T${time}:00`,
+            timeZone: "Asia/Jakarta",
           },
         };
         break;
