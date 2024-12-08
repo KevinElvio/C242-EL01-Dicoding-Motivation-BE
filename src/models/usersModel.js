@@ -91,6 +91,23 @@ const deleteUser = (user_id) => {
     return dbPool.execute(SQLQuery, [user_id]);
 };
 
+const addRefreshToken = (user_id, refresh_token) => {
+    const SQLQuery = `UPDATE users SET refresh_token = ? WHERE user_id = ?;`;
+    const values = [refresh_token, user_id];
+    console.log('in');
+    return dbPool.execute(SQLQuery, values);
+}
+
+const getRefreshToken = (user_id) => {
+    const SQLQuery = `SELECT refresh_token from users where user_id = ?;`
+    return dbPool.execute(SQLQuery, [user_id]);
+}
+
+const getGcrId = (reminder_id) => {
+    const SQLQuery = `SELECT gcr_id from learning_reminders where reminder_id = ?;`
+    return dbPool.execute(SQLQuery, [reminder_id]);
+}
+
 module.exports = {
     getAllUsers,
     createNewUser,
@@ -98,6 +115,9 @@ module.exports = {
     deleteUser,
     findUserByEmail,
     getUserBadges,
+    addRefreshToken,
+    getRefreshToken,
+    getGcrId,
     // getUserBadgesById,
     // redeemPoints,
     lastLogin,

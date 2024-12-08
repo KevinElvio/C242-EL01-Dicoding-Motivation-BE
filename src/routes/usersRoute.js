@@ -30,6 +30,10 @@ router.post('/users/:id/reminders', remindersController.addReminder);
 router.put('/users/:id/reminders/:reminders_id', remindersController.updateReminder);
 router.delete('/users/:id/reminders/:reminders_id', remindersController.deleteReminder);
 
+// Google Calendar Auth routes
+router.get('/users/:id/google-auth', remindersController.getAuthUrl);
+router.get('/users/:id/google-callback', remindersController.handleAuthCallback);
+
 // Reedem Points
 // router.get('/users/{id}/redeems/', UserController.redeemPoints);
 

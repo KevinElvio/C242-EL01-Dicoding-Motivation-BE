@@ -1,22 +1,24 @@
 const dbPool = require('../config/database');
 
-const getReminders = async () => {
-    const SQLQuery = 'SELECT * FROM learning_reminders';
-    return dbPool.execute(SQLQuery);
+const getReminders = async (userId) => {
+    const SQLQuery = 'SELECT * FROM learning_reminders where user_id = ?';
+    return dbPool.execute(SQLQuery, [userId]);
 }
 
-const getReminderById = async (reminder_id) => {
-    const SQLQuery = 'SELECT * FROM learning_reminders WHERE reminder_id = ?';
-    return dbPool.execute(SQLQuery, [reminder_id]);
+const getReminderById = async (reminder_id, userId) => {
+    const SQLQuery = 'SELECT * FROM learning_reminders WHERE reminder_id = ? and user_id = ?';
+    return dbPool.execute(SQLQuery, [reminder_id, userId]);
 };
 
-const addReminder = async (userId, name, frequency, time, days, date, course_ids) => {
+
+
+const addReminder = async (userId, name, frequency, time, days, date, course_ids, gcr_id) => {
     try {
         // Insert ke tabel learning_reminders
-        const reminderQuery = 'INSERT INTO learning_reminders (user_id, name, frequency, reminder_time, days_of_week, once_date) VALUES (?, ?, ?, ?, ?, ?)';
-        const [reminderResult] = await dbPool.execute(reminderQuery, [userId, name, frequency, time, days, date]);
+        const reminderQuery = 'INSERT INTO learning_reminders (user_id, name, frequency, reminder_time, days_of_week, once_date, gcr_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const [reminderResult] = await dbPool.execute(reminderQuery, [userId, name, frequency, time, days, date, gcr_id]);
         
-        // Dapatkan reminder_id yang baru dibuat
+        // Get reminder_id yang baru dibuat
         const newReminderId = reminderResult.insertId;
         
         // Insert ke tabel course_learning_reminders untuk setiap course_id
@@ -25,7 +27,7 @@ const addReminder = async (userId, name, frequency, time, days, date, course_ids
             dbPool.execute(courseReminderQuery, [courseId, newReminderId])
         );
         
-        // Jalankan semua insert secara parallel
+        // Jalankan semua insert
         await Promise.all(courseInsertPromises);
         
         return reminderResult;
