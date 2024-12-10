@@ -23,6 +23,7 @@ router.post('/users/:id/badges/:idBadges', UserController.postUserBadges);
 
 // Streak
 router.get('/users/streak', streakController.getStreak);
+router.get('/users/streak/:id', streakController.getByIdStreak);
 
 // Reminders
 router.get('/users/:id/reminders', remindersController.getReminders);

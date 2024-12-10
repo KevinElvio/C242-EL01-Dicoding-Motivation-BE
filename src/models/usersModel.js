@@ -39,6 +39,11 @@ const getAllUsers = () => {
     return dbPool.execute(SQLQuery)
 };
 
+const getByIdStreak = (user_id) => {
+    const SQLQuery = 'SELECT * FROM users WHERE user_id = ?';
+    return dbPool.execute(SQLQuery, [user_id])
+};
+
 const getUserBadges = () => {
     const SQLQuery = `SELECT * FROM achievements;`;
     return dbPool.execute(SQLQuery);
@@ -187,7 +192,8 @@ module.exports = {
     putUserBadges,
     postRedeemPoints,
     getAllRedeemPoints,
-    putRedeemPoints
+    putRedeemPoints,
+    getByIdStreak
 
 
 }
