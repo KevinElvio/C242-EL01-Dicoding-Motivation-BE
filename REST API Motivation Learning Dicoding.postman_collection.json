@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "3bc49fb5-e5f7-432f-b051-a30e208227dc",
+		"name": "REST API Motivation Learning Dicoding",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31700465"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"coba5@gmail.com\",\r\n    \"username\" : \"coba5\",\r\n    \"password_hash\" : \"coba5\",\r\n    \"github_profile\" : \"coba5.gitthub.com\",\r\n    \"points\": \"2\",\r\n    \"current_streak\": \"2\",\r\n    \"longest_streak\": \"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/register",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"coba2@gmail.com\",\r\n    \"password_hash\": \"coba2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/login",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjgsImVtYWlsIjoiY29iYTJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJjb2JhMiIsInBhc3N3b3JkX2hhc2giOiIkMmEkMTAkeU9Ld3E0b1UuVHlvankwVDBNQTZqdUJiZ1JEcjFLTG5XVDhmRUJUL1BkZ3hSWTlWd2lFMVciLCJnaXRodWJfcHJvZmlsZSI6ImNvYmEyLmdpdHRodWIuY29tIiwicG9pbnRzIjozMCwiY3VycmVudF9zdHJlYWsiOjIsImxvbmdlc3Rfc3RyZWFrIjoxMCwibGFzdF9jaGVja19pbiI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjQtMTEtMjdUMDQ6MDc6NTcuMDAwWiIsImxhc3RfbG9naW4iOiIyMDI0LTExLTI4VDExOjUwOjI0LjAwMFoifSwiaWF0IjoxNzMzMjk2OTIwLCJleHAiOjE3MzMzMDA1MjB9.gftNnUrkyydHhZ-xwK-vCCthwQSkUIeo3mJz6WOea94",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer |eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjcsImVtYWlsIjoiY29iYTFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJjb2JhMSIsInBhc3N3b3JkX2hhc2giOiIkMmEkMTAkbllVRS9ldTQuc09MRGhmZWdiQjlndVdnVHpTb29YMmcyWHdDYS5mUnpvM2dHaVJFcllvbW0iLCJnaXRodWJfcHJvZmlsZSI6IkNvYmExLmdpdHRodWIuY29tIiwicG9pbnRzIjozMCwiY3VycmVudF9zdHJlYWsiOjIsImxvbmdlc3Rfc3RyZWFrIjoxMCwibGFzdF9jaGVja19pbiI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjQtMTEtMjdUMDM6NTg6NTEuMDAwWiIsImxhc3RfbG9naW4iOm51bGx9LCJpYXQiOjE3MzI3NzE4NzMsImV4cCI6MTczMjc3NTQ3M30.MGfLp-2OhFvbLjkwaQHuyo7ywXXc0Y0pSb-V3LJ9cU0",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}/users",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"kevin21@gmail.com\",\r\n    \"username\" : \"Kevin Elvioo0\",\r\n    \"password_hash\" : \"Rahasiaa\",\r\n    \"github_profile\" : \"Coba.github.com\",\r\n    \"points\": \"20\",\r\n    \"current_streak\": \"25\",\r\n    \"longest_streak\": \"40\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/users/1",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/users/9",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"users",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Leaderboards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/leaderboards",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"leaderboards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Badges",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/users/5/badges",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"users",
+						"5",
+						"badges"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Streak",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/users/streak",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"users",
+						"streak"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Badges",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Redeems Points",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
