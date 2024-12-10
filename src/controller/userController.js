@@ -41,7 +41,7 @@ const getUserBadges = async (req, res) => {
 const getUserBadgesId = async (req, res) => {
     const { id } = req.params;
     try {
-        const [data] = await UsersModel.getUserBadges(id);
+        const [data] = await UsersModel.getUserBadgesId(id);
         res.json({
             message: 'Success',
             data: data

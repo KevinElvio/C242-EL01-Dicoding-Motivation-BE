@@ -48,13 +48,14 @@ const getUserBadgesId = (user_id) => {
     const SQLQuery = `SELECT 
     achievements.name,
     achievements.description,
-    achievements.point_rewards
+    achievements.points_reward,
+    achievements.claim
     FROM 
     user_achievements
     JOIN 
     achievements 
     ON 
-    user_achievements.achievement_id = achievements.id
+    user_achievements.achievement_id = achievements.achievement_id
     WHERE 
     user_achievements.user_id = ?;`;
     return dbPool.execute(SQLQuery, [user_id]);
@@ -158,8 +159,6 @@ module.exports = {
     addRefreshToken,
     getRefreshToken,
     getGcrId,
-    // getUserBadgesById,
-    // redeemPoints,
     lastLogin,
 
 
