@@ -39,6 +39,22 @@ const getRedeemPoints = async (req, res) => {
     }
 };
 
+const postRedeemPoints = async (req, res) => {
+    const { id, idRedeems } = req.params;
+    try {
+        await UsersModel.postRedeemPoints(id, idRedeems);
+        const [data] = await UsersModel.getRedeemPoints(id);
+        res.json({
+            message: 'Success',
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server Error",
+            serverMessage: error.message
+        });
+    }
+};
 
 
 
@@ -148,6 +164,7 @@ module.exports = {
     getUserBadges,
     getUserBadgesId,
     getRedeemPoints,
-    postUserBadges
+    postUserBadges,
+    postRedeemPoints
 
 }

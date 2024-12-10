@@ -90,6 +90,11 @@ const getRedeemPoints = (user_id) => {
     return dbPool.execute(SQLQuery, [user_id]);
 }
 
+const postRedeemPoints = (user_id, item_id) => {
+    const SQLQuery = `INSERT INTO user_items(user_id, item_id, redeem_at) VALUES(?, ?, NOW());`;
+    return dbPool.execute(SQLQuery, [user_id, item_id]);
+}
+
 
 const createNewUser = (body) => {
 
@@ -170,7 +175,8 @@ module.exports = {
     getGcrId,
     lastLogin,
     postUserBadges,
-    putUserBadges
+    putUserBadges,
+    postRedeemPoints
 
 
 }
