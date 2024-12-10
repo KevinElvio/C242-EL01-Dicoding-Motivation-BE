@@ -60,6 +60,7 @@ const postRedeemPoints = async (req, res) => {
     const { id, idRedeems } = req.params;
     try {
         await UsersModel.postRedeemPoints(id, idRedeems);
+        await UsersModel.putRedeemPoints(idRedeems);
         const [data] = await UsersModel.getRedeemPoints(id);
         res.json({
             message: 'Success',
