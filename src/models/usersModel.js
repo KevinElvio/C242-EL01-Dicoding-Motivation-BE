@@ -152,7 +152,6 @@ module.exports = {
     deleteUser,
     findUserByEmail,
     getUserBadges,
-
     getUserBadgesId,
     getRedeemPoints,
     lastLogin,

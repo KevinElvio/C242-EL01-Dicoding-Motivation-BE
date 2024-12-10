@@ -22,10 +22,14 @@ const getRedeemPoints = async (req, res) => {
 const getUserBadges = async (req, res) => {
     try {
         const [data] = await UsersModel.getUserBadges();
-        
+
+        const value = data.map((item) => ({
+            ...item,
+            claim : item.claim === 1 ? true : false
+        }));
         res.json({
             message: 'Success',
-            data: data
+            data: value
         })
     } catch (error) {
         res.status(500).json({
