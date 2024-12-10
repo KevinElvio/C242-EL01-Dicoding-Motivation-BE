@@ -19,6 +19,7 @@ router.put('/users/:id', UserController.updateUser);
 router.delete('/users/:id', UserController.deleteUser);
 router.get('/users/badges', UserController.getUserBadges);
 router.get('/users/:id/badges', UserController.getUserBadgesId);
+router.post('/users/:id/badges/:idBadges', UserController.postUserBadges);
 
 // Streak
 router.get('/users/streak', streakController.getStreak);

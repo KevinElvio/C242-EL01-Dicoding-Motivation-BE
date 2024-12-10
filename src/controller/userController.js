@@ -1,5 +1,28 @@
 const UsersModel = require('../models/usersModel');
 
+
+const postUserBadges = async (req, res) => {
+    const { id, idBadges } = req.params
+    try {
+        await UsersModel.postUserBadges(id, idBadges);
+        await UsersModel.putUserBadges(idBadges);
+        const [data] = await UsersModel.getUserBadgesId(id);
+        res.status(201).json({
+            message: 'Success Clamied Badge',
+            data: data.map((item) => ({
+                name: item.name,
+                description: item.description,
+                points_reward: item.points_reward
+            }))
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Server Error",
+            serverMessage: error.message
+        });
+    }
+};
+
 const getRedeemPoints = async (req, res) => {
     const { id } = req.params;
     try {
@@ -44,7 +67,11 @@ const getUserBadgesId = async (req, res) => {
         const [data] = await UsersModel.getUserBadgesId(id);
         res.json({
             message: 'Success',
-            data: data
+            data : data.map((item) => ({
+                name : item.name,
+                description : item.description,
+                points_reward : item.points_reward
+            }))
         })
     } catch (error) {
         res.status(500).json({
@@ -120,6 +147,7 @@ module.exports = {
     deleteUser,
     getUserBadges,
     getUserBadgesId,
-    getRedeemPoints
+    getRedeemPoints,
+    postUserBadges
 
 }

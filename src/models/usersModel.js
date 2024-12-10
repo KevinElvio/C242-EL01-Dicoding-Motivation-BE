@@ -43,6 +43,15 @@ const getUserBadges = () => {
     const SQLQuery = `SELECT * FROM achievements;`;
     return dbPool.execute(SQLQuery);
 }
+const putUserBadges = (achievement_id) => {
+    const SQLQuery = `UPDATE achievements SET claim = 1 WHERE achievement_id = ?;`;
+    return dbPool.execute(SQLQuery, [achievement_id]);
+}
+
+const postUserBadges = (user_id, achievement_id) => {
+    const SQLQuery = `INSERT INTO user_achievements(user_id, achievement_id, earned_at) VALUES(?, ?, NOW());`;
+    return dbPool.execute(SQLQuery, [user_id, achievement_id]);
+}
 
 const getUserBadgesId = (user_id) => {
     const SQLQuery = `SELECT 
@@ -160,6 +169,8 @@ module.exports = {
     getRefreshToken,
     getGcrId,
     lastLogin,
+    postUserBadges,
+    putUserBadges
 
 
 }
