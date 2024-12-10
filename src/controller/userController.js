@@ -23,6 +23,23 @@ const postUserBadges = async (req, res) => {
     }
 };
 
+const getAllRedeemPoints = async (req, res) => {
+    try {
+        const [data] = await UsersModel.getAllRedeemPoints();
+        res.json({
+            message: 'Success',
+            data: value = data.map((item) => ({
+                ...item,
+                claim : item.claim === 1 ? true : false
+            }))
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server Error",
+            serverMessage: error.message
+        });
+    }
+};
 const getRedeemPoints = async (req, res) => {
     const { id } = req.params;
     try {
@@ -61,14 +78,12 @@ const postRedeemPoints = async (req, res) => {
 const getUserBadges = async (req, res) => {
     try {
         const [data] = await UsersModel.getUserBadges();
-
-        const value = data.map((item) => ({
-            ...item,
-            claim : item.claim === 1 ? true : false
-        }));
         res.json({
             message: 'Success',
-            data: value
+            data: value = data.map((item) => ({
+                ...item,
+                claim : item.claim === 1 ? true : false
+            }))
         })
     } catch (error) {
         res.status(500).json({
@@ -165,6 +180,7 @@ module.exports = {
     getUserBadgesId,
     getRedeemPoints,
     postUserBadges,
-    postRedeemPoints
+    postRedeemPoints,
+    getAllRedeemPoints
 
 }

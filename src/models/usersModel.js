@@ -70,6 +70,11 @@ const getUserBadgesId = (user_id) => {
     return dbPool.execute(SQLQuery, [user_id]);
 }
 
+const getAllRedeemPoints = () => {
+    const SQLQuery = `SELECT * FROM redeem_items;`;
+    return dbPool.execute(SQLQuery);
+}
+
 const getRedeemPoints = (user_id) => {
     const SQLQuery = `SELECT 
     ui.user_id,
@@ -176,7 +181,8 @@ module.exports = {
     lastLogin,
     postUserBadges,
     putUserBadges,
-    postRedeemPoints
+    postRedeemPoints,
+    getAllRedeemPoints
 
 
 }
