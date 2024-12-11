@@ -82,7 +82,7 @@ const getReminderById = async (req, res) => {
             name: item.name,
             frequency: item.frequency,
             time: item.reminder_time,
-            date: once_date,
+            date: item.once_date,
           };
         }),
       });
@@ -228,6 +228,7 @@ const addReminder = async (req, res) => {
           },
           end: {
             dateTime: `${new Date().toISOString().split("T")[0]}T${time}:00`, 
+            timeZone: "Asia/Jakarta",
           },
           recurrence: [`RRULE:FREQ=WEEKLY;BYDAY=${daysArray.join(",")};`],
         };
