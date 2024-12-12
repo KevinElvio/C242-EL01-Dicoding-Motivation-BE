@@ -37,8 +37,8 @@ router.get('/users/:id/google-auth', remindersController.getAuthUrl);
 router.get('/users/:id/google-callback', remindersController.handleAuthCallback);
 
 // Reedem Points
-router.get('/users/:id/redeems', UserController.getRedeemPoints);
-router.get('/users/redeems', UserController.getAllRedeemPoints);
+router.get('/users/:id/redeems/:item_id', UserController.getRedeemPoints);
+router.get('/users/:id/redeems', UserController.getAllRedeemPoints);
 router.post('/users/:id/redeems/:idRedeems', UserController.postRedeemPoints);
 
 // leaderboard

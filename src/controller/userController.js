@@ -42,9 +42,9 @@ const getAllRedeemPoints = async (req, res) => {
     }
 };
 const getRedeemPoints = async (req, res) => {
-    const { id } = req.params;
+    const { item_id } = req.params;
     try {
-        const [data] = await UsersModel.getRedeemPoints(id);
+        const [data] = await UsersModel.getRedeemPoints(item_id);
         res.json({
             message: 'Success',
             data: data
