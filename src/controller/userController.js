@@ -28,10 +28,11 @@ const getAllRedeemPoints = async (req, res) => {
         const [data] = await UsersModel.getAllRedeemPoints();
         res.json({
             message: 'Success',
-            data: value = data.map((item) => ({
-                ...item,
-                claim : item.claim === 1 ? true : false
-            }))
+            data: data,
+            // value = data.map((item) => ({
+            //     ...item,
+            //     claim : item.claim === 1 ? true : false
+            // }))
         })
     } catch (error) {
         res.status(500).json({
