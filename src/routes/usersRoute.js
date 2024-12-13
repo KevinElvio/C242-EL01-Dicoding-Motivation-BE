@@ -17,8 +17,8 @@ router.post('/register', auth.register);
 router.get('/users', accessValidation, UserController.getAllUsers);
 router.put('/users/:id', UserController.updateUser);
 router.delete('/users/:id', UserController.deleteUser);
-router.get('/users/badges', UserController.getUserBadges);
-router.get('/users/:id/badges', UserController.getUserBadgesId);
+// router.get('/users/badges', UserController.getUserBadges);
+router.get('/users/:id/badges', UserController.getUserBadges);
 router.post('/users/:id/badges/:idBadges', UserController.postUserBadges);
 
 // Streak
